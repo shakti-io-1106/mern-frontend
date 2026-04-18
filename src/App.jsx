@@ -26,7 +26,7 @@ const App = () => {
     try{
       const response = await axios.get('https://mern-backend-gdl5.onrender.com');
       console.log(response.data);
-      setTodos(response.data)
+      setTodos(response.data.todos || response.data)
     }
     catch(err){
       console.log("Error Fetching Todos",err);
