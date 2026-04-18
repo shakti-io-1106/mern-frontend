@@ -15,7 +15,7 @@ const App = () => {
     e.preventDefault();
     if(!newTodo.trim()) return;
     try{
-      const response = await axios.post('https://mern-backend-gdl5.onrender.com',{text:newTodo})
+      const response = await axios.post('https://mern-backend-gdl5.onrender.com/api/todos',{text:newTodo})
       setTodos([...todos,response.data])
       setNewTodo("")
     }catch(err){
@@ -24,7 +24,7 @@ const App = () => {
   }
   const fetchTodos = async() =>{
     try{
-      const response = await axios.get('https://mern-backend-gdl5.onrender.com');
+      const response = await axios.get('https://mern-backend-gdl5.onrender.com/api/todos');
       console.log(response.data);
       setTodos(response.data.todos || response.data)
     }
@@ -40,7 +40,7 @@ const App = () => {
   }
   const saveEdit= async(id)=>{
     try{
-      const response = await axios.patch(`https://mern-backend-gdl5.onrender.com/${id}`,{text:editedText})
+      const response = await axios.patch(`https://mern-backend-gdl5.onrender.com/api/todos/${id}`,{text:editedText})
       setTodos(todos.map((todo)=>(todo._id === id ? response.data : todo)))
       setEditingTodo(null);
     }
@@ -50,7 +50,7 @@ const App = () => {
   }
   const deleteTodo = async(id) =>{
     try{
-      await axios.delete(`https://mern-backend-gdl5.onrender.com/${id}`);
+      await axios.delete(`https://mern-backend-gdl5.onrender.com/api/todos/${id}`);
       setTodos(todos.filter((todo)=> todo._id !== id))
     }catch(err){
       console.log("Error Deleting Todo",err);
