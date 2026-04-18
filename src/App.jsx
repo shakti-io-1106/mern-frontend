@@ -50,7 +50,7 @@ const App = () => {
   }
   const deleteTodo = async(id) =>{
     try{
-      await axios.delete(`/api/todos/${id}`);
+      await axios.delete(`https://mern-backend-gdl5.onrender.com/${id}`);
       setTodos(todos.filter((todo)=> todo._id !== id))
     }catch(err){
       console.log("Error Deleting Todo",err);
@@ -59,7 +59,7 @@ const App = () => {
   const toggleTodo = async(id)=>{
     try{
       const todo = todos.find((t) => t._id === id)
-      const response = await axios.patch(`/api/todos/${id}`,{completed: !todo.completed})
+      const response = await axios.patch(`/${id}`,{completed: !todo.completed})
       setTodos(todos.map((t)=> t._id === id ? response.data : t))
     }catch(err){
       console.log("Error toggline Todo",err);
