@@ -15,7 +15,7 @@ const App = () => {
     e.preventDefault();
     if(!newTodo.trim()) return;
     try{
-      const response = await axios.post('/api/todos',{text:newTodo})
+      const response = await axios.post('https://mern-backend-gdl5.onrender.com',{text:newTodo})
       setTodos([...todos,response.data])
       setNewTodo("")
     }catch(err){
@@ -40,7 +40,7 @@ const App = () => {
   }
   const saveEdit= async(id)=>{
     try{
-      const response = await axios.patch(`/api/todos/${id}`,{text:editedText})
+      const response = await axios.patch(`https://mern-backend-gdl5.onrender.com/${id}`,{text:editedText})
       setTodos(todos.map((todo)=>(todo._id === id ? response.data : todo)))
       setEditingTodo(null);
     }
